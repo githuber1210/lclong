@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.models.mapper.PostsMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.example.models.entity.Posts">
+        <id column="posts_id" property="postsId"/>
+        <result column="post_author" property="postAuthor"/>
+        <result column="post_date" property="postDate"/>
+        <result column="post_content" property="postContent"/>
+        <result column="html_content" property="htmlContent"/>
+        <result column="post_title" property="postTitle"/>
+        <result column="post_excerpt" property="postExcerpt"/>
+        <result column="post_status" property="postStatus"/>
+        <result column="comment_status" property="commentStatus"/>
+        <result column="page_view" property="pageView"/>
+        <result column="post_modified" property="postModified"/>
+        <result column="menu_order" property="menuOrder"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="cover" property="cover" />
+    </resultMap>
+
+    <resultMap id="PostsVoResultMapWithTagList" type="com.example.models.vo.PostsVo" extends="BaseResultMap">
+        <result column="username" property="username"/>
+        <result column="term_taxonomy_id" property="termTaxonomyId"/>
+        <collection property="tags" ofType="com.example.models.entity.PostTag">
+            <result column="description" property="description"/>
+            <result column="post_tag_id" property="postTagId"/>
+        </collection>
+    </resultMap>
+
+    <resultMap id="PostsVoResultMap" type="com.example.models.vo.PostsVo" extends="BaseResultMap">
+        <result column="username" property="username"/>
+        <result column="tags_name" property="tagsName"/>
+        <result column="term_taxonomy_id" property="termTaxonomyId"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List_No_Content">
+        posts_id, post_author, post_date, post_title, post_excerpt, post_status, comment_status, post_modified,
+        menu_order, comment_count,posts.cover,page_view
+    </sql>
+
+
+    <select id="findByPageWithTagPaged" resultMap="PostsVoResultMapWithTagList">
+        SELECT posts.*, p_t.description, p_t_r.post_tag_id
+        FROM (
+        SELECT
+        <include refid="Base_Column_List_No_Content" />, s_u.username
+            FROM posts
+            LEFT JOIN sys_user s_u ON posts.post_author = s_u.id
+            WHERE 1=1
+            <if test="searchTagId != null">
+                and posts.posts_id in (select post_id from post_tag_relation where post_tag_id = #{searchTagId})
+            </if>
+             and ${ew.sqlSegment} LIMIT #{pageStart}, #{pageSize}
+            ) posts
+            LEFT JOIN post_tag_relation p_t_r on posts.posts_id = p_t_r.post_id
+            LEFT JOIN post_tag p_t on p_t.post_tag_id = p_t_r.post_tag_id
+    </select>
+
+</mapper>

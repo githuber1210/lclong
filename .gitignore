@@ -1,0 +1,8 @@
+# 项目排除路径
+/lclong-api/target/
+/lclong-common/target/
+/lclong-es/target/
+/lclong-framework/target/
+/lclong-models/target/
+/lclong-mongodb/target/
+/lclong-ss/target/
