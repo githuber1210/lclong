@@ -11,6 +11,7 @@ import com.example.common.result.ResultCode;
 import com.example.common.sms.SmsTemplateEnum;
 import com.example.common.sms.VerifyCodeUntil;
 import com.example.common.util.MailServiceUtils;
+import com.example.common.log.IBehaviorService;
 import com.example.models.entity.User;
 import com.example.framework.service.ILoginService;
 import com.example.framework.service.IUserCacheService;
@@ -41,6 +42,8 @@ public class LoginController {
     private UserServiceImpl userService;
     @Resource
     private MailServiceUtils mailServiceUtils;
+    @Resource
+    private IBehaviorService behaviorService;
 
     @ApiOperation(value = "登录")
     @PostMapping(value = "/login")
@@ -52,6 +55,7 @@ public class LoginController {
             throw new ServiceException(ResultCode.SERVICE_ERROR,"用户名或密码错误");
         }
         logService.log(Constants.LOGIN,user.getUsername());
+        behaviorService.saveBehavior(user.getUsername(),Constants.LOGIN);
         HashMap<String, String> data = new HashMap<>();
         data.put("token",token);
         return Result.success(data);
@@ -126,9 +130,6 @@ public class LoginController {
         }
         return Result.success("发送成功");
     }
-
-
-
 
     @ApiOperation(value = "获取所有在线用户")
     @GetMapping("/online")

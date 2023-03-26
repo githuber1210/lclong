@@ -17,7 +17,6 @@ public class PostsPageQueryParam {
     private Long searchTagId;
     @ApiModelProperty(value = "文章状态----PUBLISHED,DELETED,DRAFT")
     private String postStatus;
-
     @ApiModelProperty(value = "页面显示数量")
     long pageSize;
     @ApiModelProperty(value = "页码")

@@ -1,10 +1,11 @@
 package com.example.ss.handler;
 
 
-import com.alibaba.fastjson2.JSON;
 import cn.hutool.core.util.StrUtil;
+import com.alibaba.fastjson2.JSON;
 import com.example.common.cache.RedisServiceImpl;
 import com.example.common.constans.Constants;
+import com.example.common.log.IBehaviorService;
 import com.example.common.log.ILogService;
 import com.example.common.result.Result;
 import com.example.common.util.ServletUtils;
@@ -26,10 +27,13 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler
     private JwtTokenUtil jwtTokenUtil;
 
     @Resource
+    private RedisServiceImpl redisService;
+
+    @Resource
     private ILogService logService;
 
     @Resource
-    private RedisServiceImpl redisService;
+    private IBehaviorService behaviorService;
 
     @Override
     public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException
@@ -40,6 +44,7 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler
             redisService.del(Constants.LOGIN_USER_USERNAME_KEY + username);
             redisService.del(Constants.LOGIN_USER_PERMISSIONS_KEY + username);
             logService.log(Constants.LOGOUT,username);
+            behaviorService.saveBehavior(username,Constants.LOGOUT);
         }
         ServletUtils.renderString(response, JSON.toJSONString(Result.success(null)));
     }

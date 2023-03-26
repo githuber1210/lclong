@@ -116,7 +116,7 @@
         <dependency>
             <groupId>com.auth0</groupId>
             <artifactId>java-jwt</artifactId>
-            <version>4.2.1</version>
+            <version>4.3.0</version>
         </dependency>
         <!-- 热部署 -->
         <dependency>
@@ -133,7 +133,7 @@
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
-            <version>6.1.6</version>
+            <version>6.4.0</version>
         </dependency>
         <!--常用工具类 -->
         <dependency>
@@ -144,7 +144,7 @@
         <dependency>
             <groupId>com.alibaba.fastjson2</groupId>
             <artifactId>fastjson2</artifactId>
-            <version>2.0.23</version>
+            <version>2.0.25</version>
         </dependency>
         <!-- 解析客户端操作系统、浏览器等 -->
         <dependency>
@@ -156,13 +156,13 @@
         <dependency>
             <groupId>io.jsonwebtoken</groupId>
             <artifactId>jjwt</artifactId>
-            <version>0.9.0</version>
+            <version>0.9.1</version>
         </dependency>
         <!-- oss -->
         <dependency>
             <groupId>com.aliyun.oss</groupId>
             <artifactId>aliyun-sdk-oss</artifactId>
-            <version>3.10.2</version>
+            <version>3.16.1</version>
         </dependency>
         <!-- websocket -->
         <dependency>
@@ -175,7 +175,7 @@
             <artifactId>tencentcloud-sdk-java</artifactId>
             <version>4.0.11</version>
         </dependency>
-        <!-- mongobd -->
+        <!-- mongodb -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-mongodb</artifactId>
@@ -184,11 +184,18 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-quartz</artifactId>
-            <version>2.6.7</version>
+            <version>3.0.4</version>
         </dependency>
-
-
+        <!-- 支付宝SDK -->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-easysdk</artifactId>
+            <version>2.2.2</version>
+        </dependency>
+        <!--消息队列相关依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
+        </dependency>
     </dependencies>
-
-
 </project>

@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 
 @Data
 @TableName("product")
@@ -16,12 +18,13 @@ public class Product {
 
     private String date;
 
-    private String press;
-
     private String abs;
 
     private String cover;
 
+    private BigDecimal price;
+
     @TableField(exist = false)
     private Category category;
+
 }

@@ -3,15 +3,14 @@ import request from '../util/request'
 // 获得站点配置信息
 export function getSiteConfigInfo() {
   return request({
-    url: `/site/getById?_=${Math.random()}`,
+    url: '/site/getById',
     method: 'get'
   })
 }
 
-// 更新站点配置信息
 export function updateSiteConfig(data) {
   return request({
-    url: `/site/update`,
+    url: '/site/update',
     method: 'post',
     data
   })

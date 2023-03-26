@@ -35,5 +35,4 @@ public class LogController {
         Page<Log> page = logService.page(new Page<>(pageNum, pageSize), query);
         return Result.success(page);
     }
-
 }

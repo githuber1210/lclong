@@ -12,7 +12,7 @@ import java.util.List;
 
 @Api(tags = "浏览记录")
 @RestController
-@RequestMapping("/History")
+@RequestMapping("/history")
 public class HistoryController {
     @Resource
     private IHistoryService HistoryService;

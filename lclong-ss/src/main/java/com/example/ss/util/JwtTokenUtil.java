@@ -20,9 +20,6 @@ public class JwtTokenUtil {
     private static final String CLAIM_KEY_USERNAME = "sub";
     private static final String CLAIM_KEY_CREATED = "created";
 
-//    @Resource
-//    private IUserService userService;
-
     @Value("${jwt.secret}")
     private String secret;
     @Value("${jwt.expiration}")
@@ -37,7 +34,6 @@ public class JwtTokenUtil {
                 .signWith(SignatureAlgorithm.HS512, secret)
                 .compact();
     }
-
 
     private Claims getClaimsFromToken(String token) {
         Claims claims = null;
@@ -111,7 +107,6 @@ public class JwtTokenUtil {
         if (StrUtil.isNotEmpty(token))
         {
             String username = getUserNameFromToken(token);
-//            User user = userService.findByUsername(username);
             return username;
         }
         return null;
